@@ -8,19 +8,52 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 10vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.item {
+  margin: 20px 40px;
 }
 
-body {
-  min-height: 20vh;
+.mainNav {
+  list-style-type: none;
+  margin: 20px;
+  padding: 40px;
+}
+
+.leftNav {
+  float: left;
+}
+
+.rightNav {
+  float: right;
+}
+
+.signOut {
+  display: none;
+}
+
+.avatar:hover .email {
+  display: none;
+}
+
+.avatar:hover .signOut {
+  display: inline;
+}
+
+li {
+  margin: 20px 10px;
+}
+
+input {
+  padding: 10px;
+  margin: 10px;
+}
+
+button {
+  padding: 10px;
+  margin: 5px;
+}
+
+button {
+  margin: 10px;
 }
 
 .App-link {

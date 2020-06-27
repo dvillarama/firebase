@@ -1,40 +1,48 @@
 import React, { Component } from "react";
-import { signout } from "../helpers/auth";
+import { signOut } from "../helpers/auth";
 
 import { Link } from "react-router-dom";
 
 export default class Menu extends Component {
   handleClick(event) {
-    signout();
+    signOut();
+  }
+
+  renderAuthenticated() {
+    const { email } = this.props;
+    return (
+      <div className="mainNav">
+        <div className="leftNav">
+          <Link to="/">Profiles</Link>
+        </div>
+        <div className="rightNav avatar">
+          <span className="email">{email}</span>
+          <span className="signOut" onClick={e => this.handleClick(e)}>Sign Out</span>
+        </div>
+      </div>
+    )
+  }
+
+  renderUnauthenticated() {
+    return (
+      <div className="mainNav">
+        <div className="leftNav">
+          <Link to="/">Profiles</Link>
+        </div>
+
+        <div className="rightNav">
+          <Link to="/login">Login</Link>/
+          <Link to="/signup">SignUp</Link>
+        </div>
+      </div>
+    )
   }
 
   render() {
-    const { authenticated, email } = this.props;
-    let authYes = <p></p>;
+    const { authenticated } = this.props;
     if (authenticated) {
-      authYes = <p>{email}</p>;
+      return this.renderAuthenticated();
     }
-    return (
-      <div>
-        {authYes}
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/signup">SignUp</Link>
-          </li>
-          <li>
-            <Link to="/profiles">Profiles</Link>
-          </li>
-          <li>
-            <span onClick={e => this.handleClick(e)}>Sign Out</span>
-          </li>
-        </ul>
-      </div>
-    );
+    return this.renderUnauthenticated();
   }
 }

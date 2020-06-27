@@ -19,6 +19,11 @@ export default class Profiles extends Component {
             const { uid, email, service } = change.doc.data();
             profiles[uid] = { email, service, uid };
           }
+          if (change.type === "removed" ) {
+            const { uid, email, service } = change.doc.data();
+            delete profiles[uid];
+          }
+          console.log({type: change});
         });
         this.setState({profiles});
       });
@@ -37,13 +42,12 @@ export default class Profiles extends Component {
     } else {
       listOfProfiles = Object.keys(profiles).map( (k) => {
         const { uid, email, service } = profiles[k];
-        return <li>{email} {service}</li>
+        return <li><span className="item">{email}</span><span className="item">{service}</span></li>
       });
     }
 
     return(
       <div>
-        <div>Profiles</div>
         <ol>
             { listOfProfiles }
         </ol>

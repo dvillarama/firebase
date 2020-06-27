@@ -12,7 +12,6 @@ import {
     Switch,
 } from "react-router-dom";
 
-import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Profiles from './pages/Profiles';
@@ -69,17 +68,15 @@ class App extends Component {
         </header>
         <Router>
           <Menu authenticated={authenticated} email={email} />
-          <div onClick={(e) => this.handleClickTest(e)}>test click</div>
           <Switch>
-            <Route exact path="/" component={Home}/>
+            <Route exact path="/" >
+              <Profiles authenticated={authenticated} />
+            </Route>
             <Route path="/login" >
               {authenticated ? <Redirect to="/" /> : <Login/>}
             </Route>
             <Route path="/signup" >
               {authenticated ? <Redirect to="/" /> : <SignUp/>}
-            </Route>
-            <Route path="/profiles" >
-              <Profiles authenticated={authenticated} />
             </Route>
           </Switch>
         </Router>

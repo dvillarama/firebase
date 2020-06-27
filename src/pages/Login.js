@@ -38,10 +38,7 @@ export default class Login extends Component {
                 onSubmit={(e) => this.handleSubmit(e)}
               >
                 <h1>
-                  Login to
-                  <Link to="/">
-                    Chatty
-                  </Link>
+                  Login
                 </h1>
                 <p>
                   Fill in the form below to login to your account.

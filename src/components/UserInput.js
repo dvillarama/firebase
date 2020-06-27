@@ -38,7 +38,7 @@ export default class UserInput extends Component {
 
     return (
       <li key={uid}>
-        <label>
+        <label className="profileEmail">
           {email}
         </label>
         <input

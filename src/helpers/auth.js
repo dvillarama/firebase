@@ -8,6 +8,6 @@ export function signin(email, password) {
     return auth().signInWithEmailAndPassword(email, password);
 }
 
-export function signout() {
+export function signOut() {
     return auth().signOut();
 }
