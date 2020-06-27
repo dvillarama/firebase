@@ -31,8 +31,6 @@ class App extends Component {
   componentDidMount() {
     auth().onAuthStateChanged((user) => {
       if (user) {
-
-        console.log({user});
         this.setState({
           email: user.email,
           uid: user.uid,
@@ -49,43 +47,44 @@ class App extends Component {
   }
 
   handleClickTest() {
-   const { uid, email } = this.state;
-    // writeUserData(uid, email, 'blah');
+    const { uid, email } = this.state;
     firestore.collection("users").doc(uid).set({
-          first: "email",
-          last: "Lovelace",
-          born: 1815
+      first: "email",
+      last: "Lovelace",
+      born: 1815
     })
-    .then(function(docRef) {
-          console.log("Document written with ID: ", docRef);
-    })
-    .catch(function(error) {
-          console.error("Error adding document: ", error);
-    });
+      .then(function(docRef) {
+        console.log("Document written with ID: ", docRef);
+      })
+      .catch(function(error) {
+        console.error("Error adding document: ", error);
+      });
   }
 
   render() {
-   const { authenticated, email } = this.state;
-  return (
-    <div className="App">
-      <header className="App-header">
-      </header>
-      <Router>
-        <Menu authenticated={authenticated} email={email} />
-        <div onClick={(e) => this.handleClickTest(e)}>test click</div>
-       <Switch>
-         <Route exact path="/" component={Home}/>
-         <Route path="/login" >
-           {authenticated ? <Redirect to="/" /> : <Login/>}
-         </Route>
-         <Route path="/signup" >
-           {authenticated ? <Redirect to="/" /> : <SignUp/>}
-         </Route>
-         <Route path="/profiles" component={Profiles}/>
-       </Switch>
-      </Router>
-    </div>
-  );
+    const { authenticated, email } = this.state;
+    return (
+      <div className="App">
+        <header className="App-header">
+        </header>
+        <Router>
+          <Menu authenticated={authenticated} email={email} />
+          <div onClick={(e) => this.handleClickTest(e)}>test click</div>
+          <Switch>
+            <Route exact path="/" component={Home}/>
+            <Route path="/login" >
+              {authenticated ? <Redirect to="/" /> : <Login/>}
+            </Route>
+            <Route path="/signup" >
+              {authenticated ? <Redirect to="/" /> : <SignUp/>}
+            </Route>
+            <Route path="/profiles" >
+              <Profiles authenticated={authenticated} />
+            </Route>
+          </Switch>
+        </Router>
+      </div>
+    );
   }
 }
 

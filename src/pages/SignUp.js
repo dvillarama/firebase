@@ -26,11 +26,8 @@ export default class SignUp extends Component {
     try {
       const { email, password, service }  = this.state;
       const result = await signup(email, password);
-     const { user } = result;
-     console.log({user});
-     writeUserData(user.uid, email, service);
-//     writeUserData('blah', 'work', 'hello');
-
+      const { user } = result;
+      writeUserData(user.uid, email, service);
     } catch (error) {
       this.setState({ error: error.message });
     }
