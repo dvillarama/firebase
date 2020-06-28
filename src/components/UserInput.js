@@ -6,14 +6,15 @@ export default class UserInput extends Component {
     super(props);
     const { service } = this.props.user;
     this.state = {
-      localService: service
+      localService: service,
+      modified: false
     };
   }
 
   handleChange(event) {
-    this.modified = true;
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
+      modified: true
     });
   }
 
@@ -21,6 +22,7 @@ export default class UserInput extends Component {
     const { uid, email } = this.props.user;
     const { localService } = this.state;
     writeUserData(uid, email, localService);
+    this.setState({ modified: false });
   }
 
   onDelete() {
@@ -31,27 +33,32 @@ export default class UserInput extends Component {
   render() {
     const { uid, email, service } = this.props.user;
     let visibleService = service;
-    if (this.modified) {
-      const { localService } = this.state;
+    const { modified, localService } = this.state;
+    if (modified) {
       visibleService = localService;
     }
 
     return (
-      <li key={uid}>
-        <label className="profileEmail">
-          {email}
-        </label>
-        <input
-        key={uid}
-        value={visibleService}
-        name="localService"
-        onChange={e => {
-          this.handleChange(e);
-        }}
-      />
-        <button onClick={e => this.onUpdate(e)}>Update</button>
-        <button onClick={e => this.onDelete(e)}>Delete</button>
-      </li>
+      <div className="profileRow">
+        <div className="item">
+          <label className="profileEmail">
+            {email}
+          </label>
+        </div>
+        <div className="item">
+          <input
+          key={uid}
+          value={visibleService}
+          name="localService"
+          onChange={e => {
+            this.handleChange(e);
+          }}
+        />
+            <button onClick={e => this.onUpdate(e)}>Update</button>
+            <button onClick={e => this.onDelete(e)}>Delete</button>
+          </div>
+          <div className="item"/>
+        </div>
     );
   }
 };

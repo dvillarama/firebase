@@ -9,7 +9,20 @@
 }
 
 .item {
-  margin: 20px 40px;
+  /* margin: 10px 10px 0px 100px; */
+  flex-basis: 100%;
+  flex: 1;
+  display: flex;
+  align-self: center;
+}
+
+.profileRow {
+  margin-top: 10px;
+  margin-left: 100px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .mainNav {

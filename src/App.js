@@ -3,7 +3,6 @@ import './App.css';
 
 import { auth } from './services/firebase';
 import { firestore } from './services/firebase';
-import { writeUserData } from './helpers/db';
 
 import {
     Redirect,
@@ -46,7 +45,7 @@ class App extends Component {
   }
 
   handleClickTest() {
-    const { uid, email } = this.state;
+    const { uid } = this.state;
     firestore.collection("users").doc(uid).set({
       first: "email",
       last: "Lovelace",

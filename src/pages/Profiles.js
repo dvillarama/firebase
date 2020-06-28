@@ -20,7 +20,7 @@ export default class Profiles extends Component {
             profiles[uid] = { email, service, uid };
           }
           if (change.type === "removed" ) {
-            const { uid, email, service } = change.doc.data();
+            const { uid } = change.doc.data();
             delete profiles[uid];
           }
           console.log({type: change});
@@ -36,21 +36,25 @@ export default class Profiles extends Component {
 
     if ( authenticated) {
       listOfProfiles = Object.keys(profiles).map( (k) => {
-        const { uid, email, service } = profiles[k];
+        const { uid } = profiles[k];
         return <UserInput key={uid} user={profiles[k]} getUser={ () => { return {...profiles[k]}}}/>;
       });
     } else {
       listOfProfiles = Object.keys(profiles).map( (k) => {
-        const { uid, email, service } = profiles[k];
-        return <li><span className="item">{email}</span><span className="item">{service}</span></li>
+        const { email, service } = profiles[k];
+        return (
+          <div className="profileRow">
+            <div className="item">{email}</div>
+            <div className="item">{service}</div>
+            <div className="item"></div>
+          </div>
+        )
       });
     }
 
     return(
       <div>
-        <ol>
-            { listOfProfiles }
-        </ol>
+        { listOfProfiles }
       </div>
     );
   }
