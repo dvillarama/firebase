@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { writeUserData, deleteUser } from '../helpers/db';
+import { writeUserData, deleteUser } from "../helpers/db";
 
 export default class UserInput extends Component {
   constructor(props) {
@@ -32,8 +32,10 @@ export default class UserInput extends Component {
 
   render() {
     const { uid, email, service } = this.props.user;
+    const { currUid } = this.props;
     let visibleService = service;
     const { modified, localService } = this.state;
+    const disabled = (uid === currUid) ? "" : "disabled";
     if (modified) {
       visibleService = localService;
     }
@@ -41,24 +43,27 @@ export default class UserInput extends Component {
     return (
       <div className="profileRow">
         <div className="item">
-          <label className="profileEmail">
-            {email}
-          </label>
+          <label className="profileEmail">{email}</label>
         </div>
         <div className="item">
           <input
-          key={uid}
-          value={visibleService}
-          name="localService"
-          onChange={e => {
-            this.handleChange(e);
-          }}
-        />
-            <button onClick={e => this.onUpdate(e)}>Update</button>
-            <button onClick={e => this.onDelete(e)}>Delete</button>
-          </div>
-          <div className="item"/>
+            className={disabled}
+            key={uid}
+            value={visibleService}
+            name="localService"
+            onChange={e => {
+              this.handleChange(e);
+            }}
+          />
+          <button className={disabled} onClick={e => this.onUpdate(e)}>
+            Update
+          </button>
+          <button className={disabled} onClick={e => this.onDelete(e)}>
+            Delete
+          </button>
         </div>
+        <div className="item" />
+      </div>
     );
   }
-};
+}

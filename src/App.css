@@ -8,6 +8,12 @@
   }
 }
 
+.disabled {
+  pointer-events:none;
+  color:#AAA;
+  background:#F5F5F5;
+}
+
 .item {
   /* margin: 10px 10px 0px 100px; */
   flex-basis: 100%;
@@ -43,6 +49,10 @@
   display: none;
 }
 
+.avatar {
+  cursor: pointer;
+}
+
 .avatar:hover .email {
   display: none;
 }
@@ -62,10 +72,6 @@ input {
 
 button {
   padding: 10px;
-  margin: 5px;
-}
-
-button {
   margin: 10px;
 }
 

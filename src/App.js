@@ -39,6 +39,8 @@ class App extends Component {
         this.setState({
           authenticated: false,
           loading: false,
+          email: '',
+          uid: undefined
         });
       }
     })
@@ -60,7 +62,7 @@ class App extends Component {
   }
 
   render() {
-    const { authenticated, email } = this.state;
+    const { uid, authenticated, email } = this.state;
     return (
       <div className="App">
         <header className="App-header">
@@ -69,7 +71,7 @@ class App extends Component {
           <Menu authenticated={authenticated} email={email} />
           <Switch>
             <Route exact path="/" >
-              <Profiles authenticated={authenticated} />
+              <Profiles authenticated={authenticated} currUid={uid} />
             </Route>
             <Route path="/login" >
               {authenticated ? <Redirect to="/" /> : <Login/>}
