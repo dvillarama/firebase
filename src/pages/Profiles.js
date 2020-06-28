@@ -23,7 +23,6 @@ export default class Profiles extends Component {
             const { uid } = change.doc.data();
             delete profiles[uid];
           }
-          console.log({type: change});
         });
         this.setState({profiles});
       });
